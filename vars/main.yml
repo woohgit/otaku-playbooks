@@ -153,3 +153,8 @@ apache_vhosts:
       RewriteCond %{HTTP_HOST}   !^csomagolas.japanmagyar.hu [NC]
       RewriteCond %{HTTP_HOST}   !^$
       RewriteRule ^/(.*)$        http://csomagolas.japanmagyar.hu/$1 [L,R=301]
+
+unattended_origins_patterns:
+  - 'origin=Ubuntu,archive=${distro_codename}-security'
+  - 'o=Ubuntu,a=${distro_codename}-updates'
+unattended_mail: 'wooh@wooh.hu'
