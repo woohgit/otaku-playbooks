@@ -1,5 +1,12 @@
 ---
 - hosts: otaku
+  tasks:
+  - name: Install default packages | apt
+    apt:
+      state: latest
+      pkg: "{{ item }}"
+    with_items:
+    - mosh
   vars_files:
     - vars/main.yml
   roles:
