@@ -12,3 +12,4 @@
   roles:
     - geerlingguy.apache
     - jnv.unattended-upgrades
+    - kamaln7.swapfile
