@@ -1,0 +1,155 @@
+apache_listen_ip: "127.0.0.1"
+apache_listen_port: 8080
+# apache_mods_enabled:
+#   - access_compat.load
+#   - alias.load
+#   - auth_basic.load
+#   - authn_core.load
+#   - authn_file.load
+#   - authz_core.load
+#   - authz_groupfile.load
+#   - authz_host.load
+#   - authz_user.load
+#   - autoindex.load
+#   - cgi.load
+#   - deflate.load
+#   - dir.load
+#   - env.load
+#   - filter.load
+#   - headers.load
+#   - mime.load
+#   - mpm_prefork.load
+#   - negotiation.load
+#   - pagespeed.load
+#   - php5.load
+#   - reqtimeout.load
+#   - rewrite.load
+#   - setenvif.load
+#   - status.load
+apache_state: started
+apache_create_vhosts: true
+apache_vhosts:
+  - servername: "admin.budapestguidehungary.com"
+    documentroot: "/var/www/www.budapestguidehungary.com/admin/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^admin.budapestguidehungary.com [NC]
+      RewriteRule ^/(.*)$        http://admin.budapestguidehungary.com/$1 [L,R=301]
+      ErrorLog /var/log/apache2/admin.budapestguidehungary.com-error.log
+      CustomLog /var/log/apache2/admin.budapestguidehungary.com-access.log combined
+
+  - servername: "budapestguidehungary.com"
+    serveralias: "www.budapestguidehungary.com"
+    documentroot: "/var/www/www.budapestguidehungary.com/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^budapestguidehungary.com [NC]
+      RewriteCond %{HTTP_HOST}   !^$
+      RewriteRule ^/(.*)$        http://budapestguidehungary.com/$1 [L,R=301]
+      ErrorLog /var/log/apache2/budapestguidehungary.com-error.log
+      CustomLog /var/log/apache2/budapestguidehungary.com-access.log combined
+
+  - servername: "bulldogspecialista.hu"
+    serveralias: "www.bulldogspecialista.hu"
+    documentroot: "/var/www/www.bulldogspecialista.hu/public"
+    extra_parameters: |
+      RewriteRule "^/sarga-szalag-a-porazon-nem-art-tudnod-hogy-mit-jelent" "/post/sarga-szalag-a-porazon-nem-art-tudnod-hogy-mit-jelent/" [R,L]
+      ErrorLog /var/log/apache2/bulldogspecialista.hu-error.log
+      CustomLog /var/log/apache2/bulldogspecialista.hu-access.log combined
+
+  - servername: "celloviolin.com"
+    serveralias: "www.celloviolin.com"
+    documentroot: "/var/www/www.celloviolin.com"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/celloviolin.hu-error.log
+      CustomLog /var/log/apache2/celloviolin.hu-access.log combined
+
+  - servername: "fizikaoktatas.hu"
+    serveralias: "www.fizikaoktatas.hu"
+    documentroot: "/var/www/www.fizikaoktatas.hu"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/fizikaoktatas.hu-error.log
+      CustomLog /var/log/apache2/fizikaoktatas.hu-access.log combined
+
+  - servername: "hangbolt.com"
+    serveralias: "hangbolt.hu www.hangbolt.com www.hangbolt.hu"
+    documentroot: "/var/www/hangbolt"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/hangbolt.com-error.log
+      CustomLog /var/log/apache2/hangbolt.com-access.log combined
+      <Directory /var/www/hangbolt/Salvi>
+        Options +Indexes
+      </Directory>
+
+  - servername: "musicteacher.hu"
+    serveralias: "www.musicteacher.hu"
+    documentroot: /var/www/www.musicteacher.hu
+    extra_parameters: | 
+      ErrorLog /var/log/apache2/musicteacher.hu-error.log
+      CustomLog /var/log/apache2/musicteacher.hu-access.log combined
+
+  - servername: "locdoc.hu"
+    serveralias: "www.locdoc.hu"
+    documentroot: "/var/www/locdoc"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/locdoc.hu-error.log
+      CustomLog /var/log/apache2/locdoc.hu-access.log combined
+
+  - servername: "wooh.hu"
+    documentroot: "/var/www/www.wooh.hu"
+    serveralias: "www.wooh.hu"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/www.wooh.hu-error.log
+      CustomLog /var/log/apache2/www.wooh.hu-access.log combined
+
+  - servername: "admin-csomagolas.japanmagyar.hu"
+    documentroot: "/var/www/csomagolas.japanmagyar.hu/admin/htdocs"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/admin-csomagolas.japanmagyar.hu-error.log
+      CustomLog /var/log/apache2/admin-csomagolas.japanmagyar.hu-access.log combined
+      RewriteCond %{HTTP_HOST}   !^admin-csomagolas.japanmagyar.hu [NC]
+      RewriteRule ^/(.*)$        http://admin-csomagolas.japanmagyar.hu/$1 [L,R=301]
+
+  - servername: "wedding.wooh.hu"
+    documentroot: "/var/www/wedding.wooh.hu/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^wedding.wooh.hu [NC]
+      RewriteCond %{HTTP_HOST}   !^$
+      RewriteRule ^/(.*)$        http://wedding.wooh.hu/$1 [L,R=301]
+      ErrorLog /var/log/apache2/wedding.wooh.hu-error.log
+      CustomLog /var/log/apache2/wedding.wooh.hu-access.log combined
+
+  - servername: "japanmagyar.hu"
+    serveralias: "www.japanmagyar.hu"
+    documentroot: "/var/www/www.japanmagyar.hu/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^japanmagyar.hu [NC]
+      RewriteCond %{HTTP_HOST}   !^$
+      RewriteRule ^/(.*)$        http://japanmagyar.hu/$1 [L,R=301]
+      ErrorLog /var/log/apache2/japanmagyar.hu-error.log
+      CustomLog /var/log/apache2/japanmagyar.hu-access.log combined
+
+  - servername: "hangarii.com"
+    serveralias: "www.hangarii.com"
+    documentroot: "/var/www/www.japanmagyar.hu/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^hangarii.com [NC]
+      RewriteCond %{HTTP_HOST}   !^$
+      RewriteRule ^/(.*)$        http://hangarii.com/$1 [L,R=301]
+      ErrorLog /var/log/apache2/hangarii.com-error.log
+      CustomLog /var/log/apache2/hangarii.com-access.log combined
+
+  - servername: "admin.japanmagyar.hu"
+    documentroot: "/var/www/www.japanmagyar.hu/admin/htdocs"
+    extra_parameters: |
+      RewriteCond %{HTTP_HOST}   !^admin.japanmagyar.hu [NC]
+      RewriteRule ^/(.*)$        http://admin.japanmagyar.hu/$1 [L,R=301]
+      ErrorLog /var/log/apache2/admin.japanmagyar.hu-error.log
+      CustomLog /var/log/apache2/admin.japanmagyar.hu-access.log combined
+
+  - servername: "csomagolas.japanmagyar.hu"
+    documentroot: "/var/www/csomagolas.japanmagyar.hu/htdocs"
+    extra_parameters: |
+      ErrorLog /var/log/apache2/csomagolas.japanmagyar.hu-error.log
+      CustomLog /var/log/apache2/csomagolas.japanmagyar.hu-access.log combined
+      RewriteCond %{HTTP_HOST}   !^csomagolas.japanmagyar.hu [NC]
+      RewriteCond %{HTTP_HOST}   !^$
+      RewriteRule ^/(.*)$        http://csomagolas.japanmagyar.hu/$1 [L,R=301]
