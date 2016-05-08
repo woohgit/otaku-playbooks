@@ -82,7 +82,7 @@ apache_vhosts:
   - servername: "musicteacher.hu"
     serveralias: "www.musicteacher.hu"
     documentroot: /var/www/www.musicteacher.hu
-    extra_parameters: | 
+    extra_parameters: |
       ErrorLog /var/log/apache2/musicteacher.hu-error.log
       CustomLog /var/log/apache2/musicteacher.hu-access.log combined
 
