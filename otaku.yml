@@ -1,5 +1,6 @@
 ---
 - hosts: otaku
+  become: yes
   tasks:
   - name: Install default packages | apt
     apt:
@@ -7,6 +8,13 @@
       pkg: "{{ item }}"
     with_items:
     - mosh
+    - ruby
+    - ruby-dev
+    - git
+  - name: Install gems
+    gem: name={{ item }} state=latest user_install=no
+    with_items:
+      - json
   vars_files:
     - vars/main.yml
   roles:
