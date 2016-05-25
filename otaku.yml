@@ -11,6 +11,7 @@
     - ruby
     - ruby-dev
     - git
+    - gnupg-agent
   - name: Install gems
     gem: name={{ item }} state=latest user_install=no
     with_items:
