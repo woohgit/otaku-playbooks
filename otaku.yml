@@ -12,12 +12,21 @@
     - ruby-dev
     - git
     - gnupg-agent
+    - squid
   - name: Install gems
     gem: name={{ item }} state=latest user_install=no
     with_items:
       - json
+  - name: Create squid config file
+    copy: content={{ squid_conf_content }} dest=/etc/squid3/squid.conf mode=0600 owner=root
+    notify:
+      - restart squid
   vars_files:
     - vars/main.yml
+    - vars/squid.yml
+  handlers:
+    - name: restart squid
+      service: name=squid3 state=restarted
   roles:
     - geerlingguy.apache
     - jnv.unattended-upgrades
